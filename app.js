@@ -1,14 +1,63 @@
-const displayValue = document.getElementById('display');
-displayValue.textContent = 123;
+const display = document.getElementById('display');
+display.textContent = "";
 
-document.getElementById('clear').addEventListener('click', () => {
-    document.getElementById('display').textContent = "";
-})
+const prevDisplay = document.getElementById('prevDisplay');
+prevDisplay.textContent = "";
+
+const numberButton = document.querySelectorAll('.number');
+const operatorButton = document.querySelectorAll('.operator');
+
+let currentOperator = null;
+firstNumber = ""
+secondNumber = ""
+
+
+document.getElementById('clear').addEventListener('click', clear)
+document.getElementById('backspace').addEventListener('click', backspace)
 
 document.getElementById('+').addEventListener('click', add)
 document.getElementById('-').addEventListener('click', subtract)
 document.getElementById('*').addEventListener('click', multiply)
 document.getElementById('/').addEventListener('click', divide)
+document.getElementById('=').addEventListener('click', evaluate)
+document.getElementById('point').addEventListener('click', () => {
+    if(display.textContent.includes('.')) return;
+    display.textContent += "."
+});
+
+
+
+
+numberButton.forEach(number => number.addEventListener('click', () => 
+    display.textContent += number.value
+));
+
+operatorButton.forEach(button => button.addEventListener('click', () =>
+    setOperator(button.textContent)
+));
+
+function clear() {
+    display.textContent = "";
+    prevDisplay.textContent = "";
+    firstNumber = "";
+    secondNumber = "";
+    currentOperator = null;
+}
+
+function backspace(){
+    display.textContent = display.textContent
+        .toString()
+        .slice(0, -1)
+}
+
+function setOperator(operator){
+    if (currentOperator !== null) evaluate();
+    firstNumber = display.textContent;
+    display.textContent = "";
+    currentOperator = operator;
+    prevDisplay.textContent = `${firstNumber} ${currentOperator}`
+
+}
 
 function add(a,b){
     return a + b
@@ -27,6 +76,8 @@ function divide(a,b){
 }
 
 function operate(a, b, operator){
+    a = Number(a)
+    b = Number(b)
     switch (operator){
         case "+":
             return add(a,b);
@@ -39,13 +90,34 @@ function operate(a, b, operator){
     }
 }
 
-function getFirstNumber(){
-    const numberButton = document.querySelectorAll('.number');
+function evaluate(){
+    if (currentOperator === null) return;
+    if (currentOperator === "/" && display.textContent === '0') {
+        alert("You cannot divide by 0!")
+        return;
+    }
+    secondNumber = display.textContent;
+    display.textContent = roundNumber(operate(firstNumber, secondNumber, currentOperator));
+    prevDisplay.textContent = `${firstNumber} ${currentOperator} ${secondNumber}`
+    currentOperator = null
+}
+
+function roundNumber(number){
+    return Math.round(number * 1000) / 1000
+}
+
+/* function calculateAdd(){
+    document.getElementById('display').textContent = "";
     numberButton.forEach(number => number.addEventListener('click', () => {
-    firstNumber = document.getElementById('display').textContent += number.value;
-}));
-};
-getFirstNumber()
+        secondNumber = document.getElementById('display').textContent += number.value;
+     }));
+    document.getElementById('=').addEventListener('click', () => {
+        operate(firstNumber, secondNumber, "+")
+    });
+    
+}
+
+
 
 function getSecondNumber(){
     const numberButton = document.querySelectorAll('.number');
@@ -53,7 +125,4 @@ function getSecondNumber(){
     secondNumber = document.getElementById('display').textContent += number.value;
 }));
 };
-
-function getOperator(){
-
-}
+*/
