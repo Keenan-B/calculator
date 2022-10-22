@@ -96,6 +96,10 @@ function evaluate(){
         alert("You cannot divide by 0!")
         return;
     }
+    if (currentOperator === "/" && display.textContent === '') {
+        alert("You cannot divide by 0!")
+        return;
+    }
     secondNumber = display.textContent;
     display.textContent = roundNumber(operate(firstNumber, secondNumber, currentOperator));
     prevDisplay.textContent = `${firstNumber} ${currentOperator} ${secondNumber}`
@@ -105,24 +109,3 @@ function evaluate(){
 function roundNumber(number){
     return Math.round(number * 1000) / 1000
 }
-
-/* function calculateAdd(){
-    document.getElementById('display').textContent = "";
-    numberButton.forEach(number => number.addEventListener('click', () => {
-        secondNumber = document.getElementById('display').textContent += number.value;
-     }));
-    document.getElementById('=').addEventListener('click', () => {
-        operate(firstNumber, secondNumber, "+")
-    });
-    
-}
-
-
-
-function getSecondNumber(){
-    const numberButton = document.querySelectorAll('.number');
-    numberButton.forEach(number => number.addEventListener('click', () => {
-    secondNumber = document.getElementById('display').textContent += number.value;
-}));
-};
-*/
