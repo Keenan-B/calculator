@@ -20,12 +20,12 @@ document.getElementById('-').addEventListener('click', subtract)
 document.getElementById('*').addEventListener('click', multiply)
 document.getElementById('/').addEventListener('click', divide)
 document.getElementById('=').addEventListener('click', evaluate)
-document.getElementById('point').addEventListener('click', () => {
+document.getElementById('point').addEventListener('click', addPoint)
+
+function addPoint(){
     if(display.textContent.includes('.')) return;
     display.textContent += "."
-});
-
-
+}
 
 
 numberButton.forEach(number => number.addEventListener('click', () => 
@@ -109,3 +109,17 @@ function evaluate(){
 function roundNumber(number){
     return Math.round(number * 1000) / 1000
 }
+
+window.addEventListener('keydown', keyboardInput)
+
+function keyboardInput(e){
+    if(e.key >= 0 && e.key <= 9) display.textContent += e.key
+    if(e.key === 'Backspace') backspace();
+    if (e.key === 'Equal' || e.key === 'Enter') evaluate();
+    if(e.key === '.') addPoint();
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') setOperator(e.key);
+
+
+
+}
+

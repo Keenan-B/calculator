@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, rgb(161, 161, 236) 0%, rgb(127, 127, 163) 35%, rgb(45, 50, 51) 100%);
+    background: linear-gradient(45deg, rgb(253, 253, 255) 0%, rgb(160, 160, 175) 35%, rgb(31, 33, 34) 100%);
 }
 
 *{
@@ -20,25 +20,34 @@ body{
     padding-bottom: 50px;
     border: solid 5px;
     border-radius: 8px;
-    background-color: lightgray;
+    background-color:rgb(160, 213, 226);
     text-align: center;
     font-size: 32px;
     font-weight:600;
+    box-shadow: rgb(67, 61, 61) 14px 22px;
+    shadow
 }
 
 #prevDisplay{
     font-size: 20px;
     text-align: right;
     color: grey;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .displayscreen{
+    max-width: 300px;
     width: 300px;
-    height: 50px;
+    min-height: 50px;
     background-color: white;
     border: solid 2px;
+    border-radius: 2px;
     padding: 5px;
-    font-size: 28px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    word-wrap:break-word;
+    word-break: break-all;
 }
 
 .mainButtons{
@@ -51,7 +60,7 @@ body{
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 160px;
+    max-width: 260px;
     gap: 10px 10px;
 }
 
@@ -62,11 +71,11 @@ body{
     font-size: 36px;
     font-weight: 700;
     border: solid 1px;
-    border-radius: 2px;
+    border-radius: 40%;
+    padding: 20px;
 }
 
 .number:hover{
-    cursor: pointer;
     background-color: silver;
 }
 
@@ -74,6 +83,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 2px;
 
 }
 
@@ -82,13 +92,15 @@ body{
     justify-content: center;
     align-items: center;
     background-color: silver;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 700;
-    border-radius: 2px;
+    border-radius: 4px;
+    border: solid 1px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .operator:hover{
-    cursor:pointer;
     background-color: whitesmoke;
 }
 
@@ -98,23 +110,26 @@ body{
     background-color: lightsteelblue;
     font-size: 36px;
     font-weight: 700;
+    border-radius: 4px;
+    border: solid 1px;
+    padding: 10px;
 }
 
 .evaluate:hover{
-    cursor: pointer;
     background-color: lightskyblue;
 }
 
 #zero {
-    width: 80px;
+    width: 120px;
 }
 
 #point {
-    width: 40px;
+    width: 80px;
+    border-radius: 40%;
+    border: solid 1px;
 }
 
 #point:hover{
-    cursor: pointer;
     background-color: silver;
 }
 
@@ -126,18 +141,34 @@ body{
     padding-top: 15px;
 }
 
-#clear {
-    background-color: lightcoral;
+#backspace, #clear{
+    border-radius: 4px;
     font-size: 28px;
     font-weight: 400;
 }
 
+#clear {
+    background-color: lightcoral;
+
+}
+
 #backspace {
-    font-size: 28px;
-    font-weight: 400;
+    background-color: indianred;
+}
+
+#backspace:hover{
+    background-color: rgb(149, 66, 66)
+}
+
+#clear:hover{
+    background-color: rgb(196, 97, 97)
 }
 
 #clear:hover, #backspace:hover{
     cursor: pointer;
 }
 
+.number:hover, .operator:hover, .evaluate:hover, #point:hover{
+    cursor: pointer;
+    transform: scale(110%)
+}
